@@ -1,0 +1,156 @@
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+      compiler: gcc
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=11
+
+    - os: linux
+      dist: bionic
+      compiler: gcc
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=14
+
+    - os: linux
+      dist: bionic
+      compiler: gcc
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=17
+
+    - os: linux
+      dist: bionic
+      compiler: clang
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=11
+
+    - os: linux
+      dist: bionic
+      compiler: clang
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=14
+
+    - os: linux
+      dist: bionic
+      compiler: clang
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=17
+
+    - os: linux
+      dist: xenial
+      compiler: gcc
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=11
+
+    - os: linux
+      dist: xenial
+      compiler: gcc
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=14
+
+    - os: linux
+      dist: xenial
+      compiler: clang
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=11
+
+    - os: linux
+      dist: xenial
+      compiler: clang
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=14
+
+    - os: linux
+      dist: trusty
+      compiler: gcc
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=11
+
+    - os: linux
+      dist: trusty
+      compiler: gcc
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=14
+
+    - os: linux
+      dist: trusty
+      compiler: clang
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=11
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6             # fix stdlib (in default configuration clang-5 uses stdlib from gcc-4.8)
+
+    - os: linux
+      dist: trusty
+      compiler: clang
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=14
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6             # fix stdlib (in default configuration clang-5 uses stdlib from gcc-4.8)
+
+#    Exclude linux/precise: "#error "unsupported GCC version" (gcc 4.6.3)
+#    - os: linux
+#      dist: precise
+
+    - os: osx
+      osx_image: xcode12
+
+    - os: osx
+      osx_image: xcode11.6
+
+    - os: osx
+      osx_image: xcode11.5
+
+    - os: osx
+      osx_image: xcode11.4
+
+    - os: osx
+      osx_image: xcode11.3
+
+    - os: osx
+      osx_image: xcode11.2
+
+    - os: osx
+      osx_image: xcode11.1
+
+    - os: osx
+      osx_image: xcode11
+
+    - os: osx
+      osx_image: xcode10.3
+
+    - os: osx
+      osx_image: xcode10.2
+
+    - os: osx
+      osx_image: xcode10.1
+
+    - os: osx
+      osx_image: xcode10
+
+    - os: osx
+      osx_image: xcode9.4
+
+    - os: osx
+      osx_image: xcode9.3
+
+    - os: osx
+      osx_image: xcode9.2
+
+    - os: osx
+      osx_image: xcode9.1
+
+    - os: osx
+      osx_image: xcode9
+
+    - os: osx
+      osx_image: xcode8.3
+
+    - os: osx
+      osx_image: xcode8
+
+    - os: osx
+      osx_image: xcode7.3
+
+
+script:
+    - mkdir build
+    - cd build
+    - cmake .. ${CMAKE_OPTIONS}
+    - cmake --build .
