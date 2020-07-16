@@ -84,9 +84,15 @@ matrix:
           packages:
             - g++-6             # fix stdlib (in default configuration clang-5 uses stdlib from gcc-4.8)
 
-#    Exclude linux/precise: "#error "unsupported GCC version" (gcc 4.6.3)
-#    - os: linux
-#      dist: precise
+    - os: linux
+      dist: precise
+      compiler: gcc
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=11
+
+    - os: linux
+      dist: precise
+      compiler: clang
+      env: CMAKE_OPTIONS=-DCMAKE_CXX_STANDARD=11
 
     - os: osx
       osx_image: xcode12
